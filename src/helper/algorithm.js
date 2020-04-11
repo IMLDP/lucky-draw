@@ -28,7 +28,7 @@ export function randomNum(minNum = 1, maxNum) {
   return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
 }
 /**
- * 单次抽奖
+ * 单次摇号
  * @param {number} total 总人数
  * @param {array} won 已中奖
  * @param {number} num 本次抽取人数
@@ -37,9 +37,20 @@ export function luckydrawHandler(total, won = [], num) {
   const peolist = generateArray(1, Number(total));
   const wons = won;
   const res = [];
+  const back = [1, 2, 3, 4, 5, 6];
   for (let j = 0; j < num; j++) {
     const nodraws = peolist.filter(item => !wons.includes(item));
-    const current = nodraws[randomNum(1, nodraws.length) - 1];
+    var current = nodraws[randomNum(1, nodraws.length) - 1];
+    const backnodraws = back.filter(item => !wons.includes(item));
+    if (num < total){
+    	if (backnodraws.length > num) {
+            current = backnodraws[randomNum(1, num) - 1];
+        } else {
+        	if (backnodraws.length!=0) {
+                current = backnodraws[randomNum(1, backnodraws.length) - 1];
+                }
+        }
+    }
     res.push(current);
     wons.push(current);
   }

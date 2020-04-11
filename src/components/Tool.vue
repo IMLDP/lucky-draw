@@ -66,12 +66,12 @@
         <el-form-item label="全员参与">
           <el-switch v-model="form.allin"></el-switch>
           <span :style="{ fontSize: '12px' }">
-            (开启后将在全体成员[无论有无中奖]中抽奖)
+            (开启后将在全体成员[无论有无中奖]中摇号)
           </span>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即抽奖</el-button>
+          <el-button type="primary" @click="onSubmit">立即摇号</el-button>
           <el-button @click="showSetwat = false">取消</el-button>
         </el-form-item>
       </el-form>
@@ -86,7 +86,7 @@
       <el-input
         type="textarea"
         :rows="10"
-        placeholder="请输入对应的号码和名单(可直接从excel复制)，格式(号码 名字)，导入的名单将代替号码显示在抽奖中。如：
+        placeholder="请输入对应的号码和名单(可直接从excel复制)，格式(号码 名字)，导入的名单将代替号码显示在摇号中。如：
 1 张三
 2 李四
 3 王五
@@ -115,10 +115,10 @@
         <el-form-item label="重置选项">
           <el-radio-group v-model="removeInfo.type">
             <el-radio border :label="0">重置全部数据</el-radio>
-            <el-radio border :label="1">重置抽奖配置</el-radio>
+            <el-radio border :label="1">重置摇号配置</el-radio>
             <el-radio border :label="2">重置名单</el-radio>
             <el-radio border :label="3">重置照片</el-radio>
-            <el-radio border :label="4">重置抽奖结果</el-radio>
+            <el-radio border :label="4">重置摇号结果</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item>
@@ -272,12 +272,12 @@ export default {
           return this.$message.error('必须输入本次抽取人数');
         }
         if (this.form.qty > this.remain) {
-          return this.$message.error('本次抽奖人数已超过本奖项的剩余人数');
+          return this.$message.error('本次摇号人数已超过本奖项的剩余人数');
         }
       }
       if (this.form.mode === 1 || this.form.mode === 5) {
         if (this.form.mode > this.remain) {
-          return this.$message.error('本次抽奖人数已超过本奖项的剩余人数');
+          return this.$message.error('本次摇号人数已超过本奖项的剩余人数');
         }
       }
       this.showSetwat = false;

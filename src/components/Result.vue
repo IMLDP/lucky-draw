@@ -8,7 +8,7 @@
   >
     <div class="dialog-title" slot="title">
       <span :style="{ fontSize: '18px' }">
-        抽奖结果
+        摇号结果
       </span>
       <span :style="{ fontSize: '14px', color: '#999', marginLeft: '10px' }">
         (点击号码可以删除)
@@ -28,9 +28,6 @@
         {{ item.name }}
       </span>
       <span class="value">
-        <span v-if="item.value && item.value.length === 0">
-          暂未抽奖
-        </span>
         <span
           class="card"
           v-for="(data, j) in item.value"
@@ -127,7 +124,7 @@ export default {
     }
     .card {
       display: inline-block;
-      // width: 40px;
+      width: 40px;
       padding: 0 5px;
       line-height: 30px;
       text-align: center;

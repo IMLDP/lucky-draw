@@ -7,7 +7,9 @@
     "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "electron_dev": "npm run build && electron build/electron.js",
+    "electron_build": "electron-packager ./dist 摇号摇号 --platform=win32 --arch=x64 --icon=./public/favicon.ico --overwrite"
   },
   "dependencies": {
     "core-js": "^3.4.3",
@@ -24,6 +26,8 @@
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-prettier": "^5.0.0",
     "babel-eslint": "^10.0.3",
+    "electron": "^8.2.1",
+    "electron-packager": "^14.2.1",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",

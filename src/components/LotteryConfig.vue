@@ -8,7 +8,7 @@
   >
     <div class="c-LotteryConfigtitle" slot="title">
       <span :style="{ fontSize: '16px', marginRight: '20px' }">
-        抽奖配置
+        摇号配置
       </span>
       <el-button size="mini" @click="addLottery">增加奖项</el-button>
       <el-button size="mini" type="primary" @click="onSubmit"
@@ -20,10 +20,10 @@
     </div>
     <div class="container">
       <el-form ref="form" :model="form" size="mini">
-        <el-form-item label="抽奖标题">
+        <el-form-item label="摇号标题">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="抽奖总人数">
+        <el-form-item label="摇号总人数">
           <el-input
             type="number"
             v-model="form.number"
@@ -31,14 +31,14 @@
             :step="1"
           ></el-input>
         </el-form-item>
-        <el-form-item label="一等奖">
+        <!-- <el-form-item label="一等奖">
           <el-input
             type="number"
             v-model="form.firstPrize"
             :min="0"
             :step="1"
           ></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item
           :label="newitem.name"
           v-for="newitem in storeNewLottery"

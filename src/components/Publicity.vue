@@ -37,10 +37,10 @@ export default {
       let message = [{ key: 0, title: config.name }];
       fields.forEach((item, index) => {
         let label = conversionCategoryName(item);
-        if (result[item] && config[item] > 0) {
+        if (result[item] && config[item] > 0 && label) {
           message.push({
             key: index + 1,
-            title: `${label}抽奖结果:`,
+            title: `${label}摇号结果:`,
             value: `${
               result[item].length > 0 ? result[item].join('、') : '暂未抽取'
             }`
@@ -57,7 +57,7 @@ export default {
 .c-Publicity {
   height: 100%;
   // width: 1000px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 255, 255, 0.1);
   margin: 0 auto;
   position: relative;
   overflow: hidden;

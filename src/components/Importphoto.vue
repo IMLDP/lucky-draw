@@ -7,7 +7,7 @@
     class="c-Importphoto"
   >
     <el-row>
-      <label for="idinput">抽奖号码</label>
+      <label for="idinput">摇号号码</label>
       <el-input
         id="idinput"
         size="mini"

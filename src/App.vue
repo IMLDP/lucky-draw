@@ -3,10 +3,10 @@
     <header>
       <Publicity v-show="!running" />
       <el-button class="res" type="text" @click="showResult = true">
-        抽奖结果
+        摇号结果
       </el-button>
       <el-button class="con" type="text" @click="showConfig = true">
-        抽奖配置
+        摇号配置
       </el-button>
     </header>
     <div id="main" :class="{ mask: showRes }"></div>
@@ -27,7 +27,7 @@
     </div>
     <transition name="bounce">
       <div id="resbox" v-show="showRes">
-        <p @click="showRes = false">{{ categoryName }}抽奖结果：</p>
+        <p @click="showRes = false">{{ categoryName }}摇号结果：</p>
         <div class="container">
           <span
             v-for="item in resArr"
@@ -46,7 +46,7 @@
               <span
                 v-if="!!list.find(d => d.key === item)"
                 :style="{
-                  fontSize: '40px'
+                  fontSize: '10px'
                 }"
               >
                 {{ list.find(d => d.key === item).name }}
@@ -92,10 +92,6 @@
     />
     <Result :visible.sync="showResult"></Result>
 
-    <span class="copy-right">
-      Copyright©zhangyongfeng5350@gmail.com
-    </span>
-
     <audio
       id="audiobg"
       preload="auto"
@@ -134,14 +130,14 @@ export default {
 
   computed: {
     resCardStyle() {
-      const style = { fontSize: '30px' };
+      const style = { fontSize: '20px' };
       const { number } = this.config;
       if (number < 100) {
-        style.fontSize = '100px';
+        style.fontSize = '20px';
       } else if (number < 1000) {
-        style.fontSize = '80px';
+        style.fontSize = '10px';
       } else if (number < 10000) {
-        style.fontSize = '60px';
+        style.fontSize = '5px';
       }
       return style;
     },
@@ -374,14 +370,14 @@ export default {
 #root {
   height: 100%;
   position: relative;
-  background-image: url('./assets/bg1.jpg');
+  background-image: url('./assets/bg3.jpg');
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
   background-color: #121936;
   .mask {
-    -webkit-filter: blur(5px);
-    filter: blur(5px);
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
   }
   header {
     height: 50px;
@@ -453,8 +449,8 @@ export default {
   }
   .itemres {
     background: #fff;
-    width: 160px;
-    height: 160px;
+    width: 60px;
+    height: 60px;
     border-radius: 4px;
     border: 1px solid #ccc;
     line-height: 160px;
@@ -468,22 +464,23 @@ export default {
     position: relative;
     .cont {
       display: flex;
+      font-size: 20px;
       justify-content: center;
       align-items: center;
     }
-    &.numberOver::before {
-      content: attr(data-id);
-      width: 30px;
-      height: 22px;
-      line-height: 22px;
-      background-color: #fff;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      font-size: 14px;
-      // border-radius: 50%;
-      z-index: 1;
-    }
+    // &.numberOver::before {
+    //   content: attr(data-id);
+    //   width: 30px;
+    //   height: 22px;
+    //   line-height: 22px;
+    //   background-color: #fff;
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 0;
+    //   font-size: 14px;
+    //   // border-radius: 50%;
+    //   z-index: 1;
+    // }
   }
 }
 </style>
