@@ -1,3 +1,10 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/lucky-draw' : './'
-};
+  // 基本路径
+  publicPath: './',
+  // 输出文件目录
+  outputDir: 'dist',
+  configureWebpack: {
+    externals: {
+    }
+  }
+}
