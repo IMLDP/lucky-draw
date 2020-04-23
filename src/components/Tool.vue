@@ -301,7 +301,7 @@ export default {
       const rows = listStr.split('\n');
       if (rows && rows.length > 0) {
         rows.forEach(item => {
-          const rowList = item.split(/\t|\s/);
+          const rowList = item.trim().split(/\s+/);
           if (rowList.length >= 2) {
             const key = Number(rowList[0].trim());
             const name = rowList[1].trim();
