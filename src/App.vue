@@ -19,7 +19,7 @@
               color: '#fff'
             }"
           >
-            {{ item.name ? item.name : item.key }}
+            {{ item.name ? protectionName(item.name) : item.key }}
             <img v-if="item.photo" :src="item.photo" :width="50" :height="50" />
           </a>
         </li>
@@ -46,10 +46,10 @@
               <span
                 v-if="!!list.find(d => d.key === item)"
                 :style="{
-                  fontSize: '10px'
+                  fontSize: '20px'
                 }"
               >
-                {{ list.find(d => d.key === item).name }}
+                {{ protectionName(list.find(d => d.key === item).name) }}
               </span>
               <span v-else>
                 {{ item }}
@@ -251,6 +251,13 @@ export default {
     window.removeEventListener('resize', this.reportWindowSize);
   },
   methods: {
+    protectionName(name) {
+        return [...name]
+          .map((item, index, arr) => {
+          return Math.floor(arr.length / 2) === index ? '*' : item;
+        })
+        .join('');
+    },
     reportWindowSize() {
       const AppCanvas = this.$el.querySelector('#rootcanvas');
       if (AppCanvas.parentElement) {

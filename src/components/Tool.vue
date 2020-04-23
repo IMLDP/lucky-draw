@@ -86,10 +86,10 @@
       <el-input
         type="textarea"
         :rows="10"
-        placeholder="请输入对应的号码和名单(可直接从excel复制)，格式(号码 名字)，导入的名单将代替号码显示在摇号中。如：
-1 张三
-2 李四
-3 王五
+        placeholder="请输入对应的号码、名单、ID(可直接从excel复制)，格式(号码 名字 id1)，导入的名单将代替号码显示在摇号中。如：
+1 张三 6666
+2 李四 8888
+3 王五 9999
 				"
         v-model="listStr"
       ></el-input>
@@ -305,11 +305,21 @@ export default {
           if (rowList.length >= 2) {
             const key = Number(rowList[0].trim());
             const name = rowList[1].trim();
-            key &&
+            if (rowList.length >= 3) {
+              const id = rowList[2].trim();
+              key &&
+              list.push({
+                key,
+                name,
+                id
+              });
+            } else {
+              key &&
               list.push({
                 key,
                 name
               });
+            }
           }
         });
       }

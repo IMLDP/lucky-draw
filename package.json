@@ -7,7 +7,7 @@
     "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint --fix --ext .js,.vue src",
     "electron_dev": "npm run build && electron build/electron.js",
     "electron_build": "electron-packager ./dist 摇号摇号 --platform=win32 --arch=x64 --icon=./public/favicon.ico --overwrite"
   },

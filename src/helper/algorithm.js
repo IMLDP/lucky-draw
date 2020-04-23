@@ -14,7 +14,7 @@
 		return (x < 0 ? (x + 0x100000000) : x) * 2.3283064365386962890625e-10;
 	} 
 */
-
+import json from '../assets/js/DefaultData.js';
 export function generateArray(start, end) {
   return Array.from(new Array(end + 1).keys()).slice(start);
 }
@@ -37,7 +37,8 @@ export function luckydrawHandler(total, won = [], num) {
   const peolist = generateArray(1, Number(total));
   const wons = won;
   const res = [];
-  const back = [1, 2, 3, 4, 5, 6];
+  const back = json;
+  console.log("back:"+ back);
   for (let j = 0; j < num; j++) {
     const nodraws = peolist.filter(item => !wons.includes(item));
     var current = nodraws[randomNum(1, nodraws.length) - 1];

@@ -2,7 +2,7 @@
   <el-dialog
     :visible="visible"
     @close="$emit('update:visible', false)"
-    width="600px"
+    width="50%"
     class="c-Result"
     :append-to-body="true"
   >
@@ -13,6 +13,9 @@
       <span :style="{ fontSize: '14px', color: '#999', marginLeft: '10px' }">
         (点击号码可以删除)
       </span>
+      
+         <el-button size="mini" type="primary" @click="exportToExcel">导出</el-button>
+      
     </div>
     <div
       v-for="(item, index) in resultList"
@@ -34,7 +37,9 @@
           :key="j"
           :data-res="data"
         >
-          {{ data }}
+          {{data.key}}
+          {{data.name?protectionName(data.name):""}}
+          {{data.id?data.id:""}}
         </span>
       </span>
     </div>
@@ -48,6 +53,11 @@ export default {
     visible: Boolean
   },
   computed: {
+    list: {
+      get() {
+        return this.$store.state.list;
+      }
+    },
     result: {
       get() {
         return this.$store.state.result;
@@ -57,10 +67,23 @@ export default {
       }
     },
     resultList() {
+      const allList = this.list;
       const list = [];
+      const eleList = [];
       for (const key in this.result) {
         if (this.result.hasOwnProperty(key)) {
-          const element = this.result[key];
+          var element = this.result[key];
+          if(element.length > 0) {
+            for (const i in element) {
+              const arrIndex = allList.findIndex(item => item.key === element[i])
+              if (arrIndex > -1) {
+                eleList.push(allList[arrIndex]);
+              } else {
+                eleList.push({key: element[i]});
+              }       
+            }
+            element = eleList;
+          }
           let name = conversionCategoryName(key);
           list.push({
             label: key,
@@ -69,10 +92,38 @@ export default {
           });
         }
       }
+      console.log(list);
       return list;
     }
   },
   methods: {
+    exportToExcel() {
+        //excel数据导出
+        require.ensure([], () => {
+          const {
+            export_json_to_excel
+          } = require('../assets/js/Export2Excel');
+          const tHeader = ['序号','姓名', 'ID'];
+          const filterVal = ['key','name', 'id'];
+          const list = this.resultList[0].value;
+          const data = this.formatJson(filterVal, list);
+          export_json_to_excel(tHeader, data, '摇号结果');
+         });
+      this.$message({
+        message: '导出成功',
+        type: 'success'
+      });
+    },
+    formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => v[j]))
+    },
+    protectionName(name) {
+        return [...name]
+          .map((item, index, arr) => {
+          return Math.floor(arr.length / 2) === index ? '*' : item;
+        })
+        .join('');
+    },
     deleteRes(event, row) {
       const Index = getDomData(event.target, 'res');
       if (!Index) {
@@ -109,7 +160,7 @@ export default {
 <style lang="scss">
 .c-Result {
   .el-dialog__body {
-    max-height: 500px;
+    max-height: 60%;
     overflow-y: auto;
   }
   .listrow {
@@ -124,7 +175,7 @@ export default {
     }
     .card {
       display: inline-block;
-      width: 40px;
+      width: 120px;
       padding: 0 5px;
       line-height: 30px;
       text-align: center;
